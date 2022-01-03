@@ -1,0 +1,145 @@
+.year {
+  background-color: transparent !important;
+  color: #373839 !important;
+  border-right: 1px solid #c9c4c0 !important;
+}
+.down {
+  color: #ff7506 !important;
+  background-color: transparent !important;
+}
+
+#sub {
+  background-image: url(../../../assets/images/subject.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 90px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 25px 4px rgba(154, 202, 245, 0.25);
+}
+
+#teacher {
+  background-image: url(../../../assets/images/teacher.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 90px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 25px 4px rgba(154, 202, 245, 0.25);
+}
+
+#file {
+  background-image: url(../../../assets/images/file.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 90px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 25px 4px rgba(154, 202, 245, 0.25);
+}
+
+#exam {
+  background-image: url(../../../assets/images/exam.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 90px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 25px 4px rgba(154, 202, 245, 0.25);
+}
+
+#nienkhoa {
+  display: flex;
+
+  align-items: center;
+}
+
+.backnext {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  color: #ff7506;
+}
+
+.disable {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  color: #c9c4c0;
+}
+
+#tailieu {
+  box-shadow: 4px 4px 25px 4px rgba(154, 202, 245, 0.25);
+  border-radius: 8px;
+}
+
+.playSub {
+  background-color: transparent;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: 100px;
+  width: 100px;
+  color: white;
+  margin: 15px 0;
+}
+
+#playSub {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#imgFile {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+#contentSub {
+  margin: 15px 0;
+}
+
+#cardCover {
+  background-color: #ffa75e;
+  margin-bottom: 20px;
+  border-radius: 16px;
+}
+
+#cardInside {
+  margin: 0px 5px 5px 5px;
+  border-radius: 16px;
+}

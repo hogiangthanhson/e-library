@@ -1,0 +1,46 @@
+.topbar {
+  width: 100%;
+  height: 69px;
+  position: relative;
+  .account {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    top: 14px;
+    .left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-name {
+      margin: 0 25px 0 5px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.015em;
+      color: var(--blue-orange-7);
+    }
+    .content {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 130%;
+      color: var(--blue-orange-4);
+      text-decoration: underline;
+      position: relative;
+      &:before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: -12px;
+        width: 1px;
+        height: 36px;
+        background: var(--blue-orange-6);
+      }
+    }
+  }
+}

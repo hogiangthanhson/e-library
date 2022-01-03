@@ -1,0 +1,159 @@
+@import-normalize;
+
+@font-face {
+  font-family: 'Mulish';
+  src: url('../fonts/Mulish.ttf') format('woff supports variations'),
+    url('../fonts/Mulish.ttf') format('woff2-variations');
+  font-weight: 400 600 800;
+  font-display: fallback;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400&display=fallback');
+
+:root {
+  --blue-orange-7: #373839;
+  --blue-orange-6: #823b00;
+  --blue-orange-5: #cc5c00;
+  --blue-orange-4: #ff7506;
+  --blue-orange-3: #ffa75e;
+  --blue-orange-2: #ffd8b8;
+  --blue-orange-1: #fff9f4;
+  --strong: #ff5400;
+  --gradient: linear-gradient(270deg, #ff5400 0%, #f17f21 80.56%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: 'Mulish', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  background-color: #fff;
+  scroll-behavior: smooth;
+}
+.container {
+  max-width: 1640px;
+  margin: 0 65px 0 103px;
+}
+.link {
+  color: #ee4d2d;
+}
+ul {
+  list-style: none;
+}
+:focus-visible {
+  outline: 0;
+}
+button {
+  cursor: pointer;
+  &:disabled {
+    cursor: default;
+  }
+}
+
+h1 {
+  font-family: Mulish;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0.015em;
+  color: #000000;
+}
+
+h2 {
+  font-family: Mulish;
+  font-size: 28px;
+  line-height: 33px;
+  letter-spacing: 0.015em;
+  color: #000000;
+}
+
+.sub-header1 {
+  font-family: Mulish;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: 0.015em;
+  color: #000000;
+}
+
+.sub-header2 {
+  font-family: Mulish;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.015em;
+  color: #000000;
+}
+.menu {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  color: #000000;
+}
+
+.sub-content {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.content {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.status {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+}
+
+.note {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000000;
+}
+
+label {
+  color: var(--blue-orange-7);
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.015em;
+}
+
+a {
+  text-decoration: none;
+}

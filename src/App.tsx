@@ -1,57 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import 'assets/styles/global.scss';
+import { NotFound, PrivateRoute } from 'components/Common';
+import { AdminLayout } from 'components/Layout';
+import ForgotPassword from 'features/auth/pages/ForgotPassword';
+import LoginPage from 'features/auth/pages/LoginPage';
+import { HomePage } from 'pages/Home';
+import { ExamBankPage } from 'pages/ExamBank';
+import { NotificationPage } from 'pages/Notification';
+import { PrivateFilePage } from 'pages/PrivateFile';
+import { SubjectManagementPage } from 'pages/SubjectManagement';
+import { SupportPage } from 'pages/Support';
+import { SystemPage } from 'pages/System';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Routes>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="forgotPassword" element={<ForgotPassword />} />
+      <Route
+        path="/*"
+        element={
+          <PrivateRoute>
+            <AdminLayout />
+          </PrivateRoute>
+        }
+      >
+        <Route index element={<HomePage />} />
+        <Route path="subjectmanagement" element={<SubjectManagementPage />} />
+        <Route path="privatefile" element={<PrivateFilePage />} />
+        <Route path="exambank" element={<ExamBankPage />} />
+        <Route path="notify" element={<NotificationPage />} />
+        <Route path="system" element={<SystemPage />} />
+        <Route path="support" element={<SupportPage />} />
+      </Route>
+      <Route element={<NotFound />} />
+    </Routes>
   );
 }
 
