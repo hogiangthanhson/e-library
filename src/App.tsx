@@ -7,14 +7,16 @@ import { HomePage } from 'pages/Home';
 import { ExamBankPage } from 'pages/ExamBank';
 import { NotificationPage } from 'pages/Notification';
 import { PrivateFilePage } from 'pages/PrivateFile';
-import { SubjectManagementPage } from 'pages/SubjectManagement';
+import { SubjectListPage} from 'pages/SubjectManagement';
 import { SupportPage } from 'pages/Support';
 import { SystemPage } from 'pages/System';
 import { Route, Routes } from 'react-router-dom';
+import { Profile } from 'pages/Profile';
 
 function App() {
   return (
     <Routes>
+      <Route path="*" element={<NotFound />} />
       <Route path="login" element={<LoginPage />} />
       <Route path="forgotPassword" element={<ForgotPassword />} />
       <Route
@@ -25,15 +27,15 @@ function App() {
           </PrivateRoute>
         }
       >
-        <Route index element={<HomePage />} />
-        <Route path="subjectmanagement" element={<SubjectManagementPage />} />
+        <Route path="home" element={<HomePage />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="subjectmanagement/subject-list" element={<SubjectListPage />} />
         <Route path="privatefile" element={<PrivateFilePage />} />
         <Route path="exambank" element={<ExamBankPage />} />
         <Route path="notify" element={<NotificationPage />} />
         <Route path="system" element={<SystemPage />} />
         <Route path="support" element={<SupportPage />} />
       </Route>
-      <Route element={<NotFound />} />
     </Routes>
   );
 }

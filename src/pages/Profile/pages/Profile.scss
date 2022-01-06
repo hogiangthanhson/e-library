@@ -1,0 +1,167 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  box-shadow: 4px 4px 25px 4px rgba(154, 202, 245, 0.25);
+  border-radius: 16px;
+}
+#editBtn {
+  width: 160px;
+  border-radius: 8px;
+  font-family: Mulish;
+  font-size: 18px;
+  line-height: 21px;
+  letter-spacing: 0.015em;
+  color: #ffffff;
+  padding: 15px 35px;
+  border: none;
+}
+
+#geneInfo {
+  background-color: #cc5c00;
+  color: white;
+  border-radius: 16px 16px 0px 0px;
+}
+
+.iconUpload {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--blue-orange-5);
+  border: 2px solid white;
+  width: 56px;
+  height: 56px;
+  color: white;
+  left: 50%;
+  top: 105%;
+  margin-left: -10px;
+  margin-top: -10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.cusInput {
+  width: 30px !important;
+  height: 25px !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &:hover {
+    cursor: pointer;
+  }
+  path {
+    fill: #fff;
+  }
+}
+
+.bigDiv {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
+  margin-top: 25px;
+}
+
+.inputCus {
+  width: 100%;
+  background-color: #e1e1e1;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  &.gender {
+    width: 30%;
+  }
+}
+
+#labelCus {
+  position: relative;
+  height: 20px;
+  &-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #373839;
+  }
+}
+
+#passCus {
+  height: 41px;
+  display: flex;
+  margin-left: 20px;
+  align-items: center;
+}
+
+#addressCus {
+  position: relative;
+  height: 100px;
+  &-content {
+    position: absolute;
+    top: 10;
+    left: 0;
+    color: #373839;
+  }
+}
+
+#colOne {
+  margin-top: 32px;
+}
+
+#gender {
+  padding: 0;
+  width: 50%;
+}
+
+.btn-success {
+  background: var(--blue-orange-4);
+}
+.btn-secondary {
+  width: 100%;
+  background-color: #c9c4c0;
+  border: none;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px 0px;
+  margin-right: 20px;
+}
+
+.editInput {
+  width: 100%;
+  padding: 10px;
+  padding-left: 15px;
+  background-color: white;
+  color: black !important;
+  border: 1px solid #37383983;
+  border-radius: 8px;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.title {
+  color: #fff;
+  padding: 16px 0 16px 63px;
+}
+
+.menu {
+  color: var(--blue-orange-7);
+  opacity: 0.8;
+}
+
+.input-code {
+  width: 100%;
+  padding: 10px;
+  padding-left: 15px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 8px;
+}
+
+.note {
+  color: var(--blue-orange-7);
+}
+
+.info {
+  flex-wrap: nowrap;
+}

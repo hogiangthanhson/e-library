@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Navigation, TopBar } from 'components/Common';
+import { Navigation, TopBar, Breadcrumb } from 'components/Common';
 import { Outlet } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,8 @@ export function AdminLayout() {
       <Box className={classes.sidebar}>
         <Navigation />
       </Box>
-      <Box className={classes.main}>
+      <Box className={classes.main + " container"}>
+        <Breadcrumb />
         <Outlet />
       </Box>
     </Box>

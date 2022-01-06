@@ -1,13 +1,3 @@
-import * as React from 'react';
-
-export interface NotFoundProps {
-  
-}
-
-export function NotFound (props: NotFoundProps) {
-  return (
-    <div>
-      Not Found
-    </div>
-  );
+export function NotFound() {
+  return <div style={{textAlign: 'center', fontSize: '48px'}}>Page 404</div>;
 }

@@ -1,4 +1,5 @@
 @import-normalize;
+@import './bootstrap_mini';
 
 @font-face {
   font-family: 'Mulish';
@@ -25,7 +26,7 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: 0;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-smoothing: antialiased;
@@ -51,6 +52,17 @@ body {
   max-width: 1640px;
   margin: 0 65px 0 103px;
 }
+
+.row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .link {
   color: #ee4d2d;
 }
@@ -118,11 +130,11 @@ h2 {
 }
 
 .content {
-  font-family: 'Source Sans Pro';
+  font-family: Source Sans Pro;
   font-style: normal;
-  font-weight: 600;
+  font-weight: normal;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 130%;
   color: #000000;
 }
 
@@ -156,4 +168,11 @@ label {
 
 a {
   text-decoration: none;
+}
+
+.mb-28 {
+  margin-bottom: 28px !important;
+}
+.pdt-60 {
+  padding-top: 60px;
 }

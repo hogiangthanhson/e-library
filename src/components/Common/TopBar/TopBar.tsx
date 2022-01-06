@@ -1,6 +1,6 @@
 import { ReactComponent as User } from 'assets/images/user_circle.svg';
 import { useAppDispatch } from 'app/hooks';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { removeUser } from 'features/auth/userSlice';
 import './TopBar.scss';
 
@@ -10,7 +10,7 @@ export function TopBar() {
   return (
     <div className="container">
       <div className="topbar">
-        <div className="account">
+        <Link to='profile' className="account">
           <div className="left">
             <User />
             <div className="account-name menu">Admin</div>
@@ -27,7 +27,7 @@ export function TopBar() {
               Đăng xuất
             </Link>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

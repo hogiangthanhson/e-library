@@ -1,0 +1,47 @@
+.nien_khoa {
+  display: flex;
+  align-items: center;
+  margin-right: 67px;
+  .content {
+    color: var(--blue-orange-7);
+    width: 69px;
+  }
+  .custom_select {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    margin-left: 8px;
+    background: #ffffff;
+    box-sizing: border-box;
+    border: 1px solid var(--blue-orange-7);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    #form-control {
+      width: 136px;
+      padding: 5px 12px;
+      height: 100%;
+      border: initial;
+      cursor: pointer;
+    }
+    .arrow {
+      display: flex;
+      align-items: center;
+      padding: 5px 4px 3px 4px;
+      width: 30px;
+      height: 100%;
+      right: 0;
+      top: 0;
+      position: absolute;
+      pointer-events: none;
+      &:before {
+        position: absolute;
+        content: '';
+        height: 31px;
+        left: 0;
+        border-left: 1px solid #c9c4c0;
+      }
+    }
+  }
+}

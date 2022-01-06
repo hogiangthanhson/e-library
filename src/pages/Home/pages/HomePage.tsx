@@ -1,137 +1,109 @@
 import './HomePage.scss';
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-
-import WEB23 from 'assets/images/WEB23.png';
-import Word from 'assets/images/word.png';
-import Ppt from 'assets//images/ppt.png';
-import Xlxs from 'assets//images/xlxs.png';
-
-const options = ['2020-2021', '2019-2020', '2018-2019'];
+import { ReactComponent as Play } from 'assets/images/play_video.svg';
+import { ReactComponent as Arrow } from 'assets/images/arrow.svg';
+import { ReactComponent as ArrowRight } from 'assets/images/arrow_right.svg';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { NienKhoa } from 'components/Common';
 
 const listSubject = [
   {
-    name: 'Website Design',
+    name: 'Phát triển Website',
     des: 'Web Design',
-    code: 'WEB23',
-    classes: '5',
+    nameId: 'WEB23',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/WEB23.jpg'),
   },
   {
     name: 'Kỹ năng mềm',
-    des: 'Web Design',
-    code: 'KNM13',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    des: 'Kỹ năng mềm',
+    nameId: 'KNM13',
+    teacher: 'ABC',
+    image: require('../../../assets/images/KNM13.jpg'),
   },
   {
-    name: 'Toán đại số',
-    des: 'Web Design',
-    code: 'MBA13',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    name: 'Phát triển Mobile App',
+    des: 'Mobile App Design',
+    nameId: 'MBA13',
+    teacher: 'XYZ',
+    image: require('../../../assets/images/MBA13.jpg'),
   },
   {
-    name: 'Kiểm toán',
-    des: 'Web Design',
-    code: 'DLK4',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    name: 'Phương trình bậc 3',
+    des: 'Toán Đại Số',
+    nameId: 'DLK4',
+    teacher: 'Phạm Văn C',
+    image: require('../../../assets/images/DLK4.jpg'),
   },
   {
-    name: 'Code',
+    name: 'Làm quen với Tin học',
     des: 'Web Design',
-    code: 'THZ102',
-    classes: '5',
+    nameId: 'THZ102',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/THZ102.jpg'),
   },
   {
-    name: 'Sinh học',
-    des: 'Web Design',
-    code: 'SLGG22',
-    classes: '5',
+    name: 'Gene trội Gene lặn',
+    des: 'Sinh học',
+    nameId: 'SLGG22',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/SLGG22.jpg'),
   },
   {
-    name: 'Thương mại điện tử',
+    name: 'Người lái đò sông đà',
     des: 'Web Design',
-    code: 'VH112',
-    classes: '5',
+    nameId: 'VH112',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/VH112.jpg'),
   },
   {
-    name: 'Lịch sử',
-    des: 'Web Design',
-    code: 'MTLS12',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    name: 'Lịch sử Mỹ thuật hiện địa',
+    des: 'Lịch sử',
+    nameId: 'MTLS12',
+    teacher: 'Ms. Yến',
+    image: require('../../../assets/images/MTLS12.jpg'),
   },
   {
-    name: 'Basic Design',
+    name: 'Phát triển Website',
     des: 'Web Design',
-    code: 'DES23',
-    classes: '5',
+    nameId: 'WEB23',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/WEB23.jpg'),
   },
   {
-    name: 'Sample11',
-    des: 'Web Design',
-    code: 'SP11',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    name: 'Kỹ năng mềm',
+    des: 'Kỹ năng mềm',
+    nameId: 'KNM13',
+    teacher: 'ABC',
+    image: require('../../../assets/images/KNM13.jpg'),
   },
   {
-    name: 'Application',
-    des: 'Web Design',
-    code: 'APP5',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    name: 'Phát triển Mobile App',
+    des: 'Mobile App Design',
+    nameId: 'MBA13',
+    teacher: 'XYZ',
+    image: require('../../../assets/images/MBA13.jpg'),
   },
   {
-    name: 'Toán cao cấp',
-    des: 'Web Design',
-    code: 'TCC4',
-    classes: '5',
-    teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    name: 'Phương trình bậc 3',
+    des: 'Toán Đại Số',
+    nameId: 'DLK4',
+    teacher: 'Phạm Văn C',
+    image: require('../../../assets/images/DLK4.jpg'),
   },
   {
-    name: 'C++',
+    name: 'Làm quen với Tin học',
     des: 'Web Design',
-    code: 'C21',
-    classes: '5',
+    nameId: 'THZ102',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/THZ102.jpg'),
   },
   {
-    name: 'Gene',
-    des: 'Web Design',
-    code: 'GEN5',
-    classes: '5',
+    name: 'Gene trội Gene lặn',
+    des: 'Sinh học',
+    nameId: 'SLGG22',
     teacher: 'Hoa Hoa',
-    image: `${WEB23}`,
+    image: require('../../../assets/images/SLGG22.jpg'),
   },
 ];
 
@@ -141,34 +113,39 @@ const listFile = [
     datetime: '12:01 12/12/2020',
     subject: 'Thương mại điện tử',
     teacher: 'Hoa Hoa',
-    image: `${Word}`,
+    image: require('../../../assets/images/ws.png'),
   },
   {
     name: 'Lịch sử mỹ thuật từ thế kỉ V.ppt',
     datetime: '12:01 12/12/2020',
     subject: 'Lịch sử mỹ thuật',
-    teacher: 'Hoa Hoa',
-    image: `${Ppt}`,
+    teacher: 'Ms. Yến',
+    image: require('../../../assets/images/pp.png'),
   },
   {
     name: 'Danh sách ôn tập.xlsx',
     datetime: '12:01 10/11/2020',
     subject: 'Ngữ văn',
-    teacher: 'Hoa Hoa',
-    image: `${Xlxs}`,
+    teacher: 'Nguyễn Hoa',
+    image: require('../../../assets/images/xls.png'),
   },
   {
     name: 'Bài giảng toán tiết 1.mp3',
     datetime: '12:01 12/12/2020',
     subject: 'Toán đại số',
-    teacher: 'Hoa Hoa',
+    teacher: 'ABC',
+    image: require('../../../assets/images/MP3.png'),
+  },
+  {
+    name: 'Lorem ipsum.mp4',
+    datetime: '12:01 12/12/2020',
+    subject: 'Tin học',
+    teacher: 'XYZ',
+    image: require('../../../assets/images/mp4.png'),
   },
 ];
 
 export const HomePage = () => {
-  const [open, setOpen] = useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [page, setPage] = useState(0);
   const [file, setFile] = useState(0);
 
@@ -196,283 +173,139 @@ export const HomePage = () => {
 
   const filePerPage = listFile.slice(file, file + 3);
 
-  const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
-  };
-
-  const handleMenuItemClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, index: number) => {
-    setSelectedIndex(index);
-    setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event: Event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   return (
-    <div className='container'>
-      <h1>Trang chủ</h1>
-      <div className="row">
-        <div id="nienkhoa" className="col-sm-3" style={{ paddingLeft: '0px', height: '90px' }}>
-          <React.Fragment>
-            <label style={{ marginRight: '20px' }}>Niên khoá</label>
-            <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-              <Button className="year" onClick={handleClick}>
-                {options[selectedIndex]}
-              </Button>
-              <Button
-                className="down"
-                size="small"
-                aria-controls={open ? 'split-button-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-label="select merge strategy"
-                aria-haspopup="menu"
-                onClick={handleToggle}
-              >
-                <ArrowDropDownIcon />
-              </Button>
-            </ButtonGroup>
-            <Popper
-              open={open}
-              anchorEl={anchorRef.current}
-              role={undefined}
-              transition
-              disablePortal
-              style={{ zIndex: '99999999' }}
-            >
-              {({ TransitionProps, placement }) => (
-                <Grow
-                  {...TransitionProps}
-                  style={{
-                    transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-                  }}
-                >
-                  <Paper>
-                    <ClickAwayListener onClickAway={handleClose}>
-                      <MenuList id="split-button-menu">
-                        {options.map((option, index) => (
-                          <MenuItem
-                            key={option}
-                            selected={index === selectedIndex}
-                            onClick={(event) => handleMenuItemClick(event, index)}
-                          >
-                            {option}
-                          </MenuItem>
-                        ))}
-                      </MenuList>
-                    </ClickAwayListener>
-                  </Paper>
-                </Grow>
-              )}
-            </Popper>
-          </React.Fragment>
+    <main className="homepage">
+      <section className="line_1">
+        <NienKhoa />
+        <div className="list_tab">
+          <section className="tab-item">
+            <h1>12</h1>
+            <span className="sub-header2">Môn học</span>
+          </section>
+          <section className="tab-item tab-item--completed">
+            <h1>33</h1>
+            <span className="sub-header2">Giảng viên</span>
+          </section>
+          <section className="tab-item">
+            <h1>13</h1>
+            <span className="sub-header2">Tập riêng tư</span>
+          </section>
+          <section className="tab-item tab-item--average">
+            <h1>132</h1>
+            <span className="sub-header2">Đề thi</span>
+          </section>
         </div>
-        <div className="col-sm-9" style={{ paddingRight: '0px' }}>
-          <div style={{ flexWrap: 'nowrap', display: 'flex' }}>
-            <div id="sub" className="card" style={{ width: '22%' }}>
-              <h1>12</h1>
-              <p>Môn học</p>
-            </div>
-
-            <div id="teacher" className="card" style={{ width: '22%', marginLeft: '4%' }}>
-              <h1>33</h1>
-              <p>Giảng viên</p>
-            </div>
-
-            <div id="file" className="card" style={{ width: '22%', marginLeft: '4%' }}>
-              <h1>13</h1>
-              <p>Tệp riêng tư</p>
-            </div>
-
-            <div id="exam" className="card" style={{ width: '22%', marginLeft: '4%' }}>
-              <h1>132</h1>
-              <p>Đề thi</p>
-            </div>
+      </section>
+      <section className="course">
+        <div className="row">
+          <div className="sub-header2">Tài liệu môn học đã xem gần đây</div>
+          <div className="arrow">
+            <button
+              className={page > 0 ? 'backnext' : 'disable'}
+              onClick={page > 0 ? previousPage : disable}
+              disabled={page > 0 ? false : true}
+            >
+              <Arrow className="arrow-icon" />
+            </button>
+            <button
+              className={page < subPerPage.length - 1 ? 'backnext' : 'disable'}
+              onClick={page < subPerPage.length - 1 ? nextPage : disable}
+              disabled={page < subPerPage.length - 1 ? false : true}
+            >
+              <ArrowRight className="arrow-icon" />
+            </button>
           </div>
         </div>
-      </div>
-      <div style={{ marginTop: '50px' }}>
-        <div className="row" style={{ paddingLeft: '0px', paddingRight: '0px' }}>
-          <div
-            className="row"
-            style={{
-              paddingRight: '0px',
-              color: '#CC5C00',
-              paddingLeft: '0px',
-            }}
-          >
-            <div className="col-sm-10" style={{ paddingLeft: '0px', marginBottom: '10px' }}>
-              <p>
-                <b>Tài liệu môn học đã xem gần đây</b>
-              </p>
-            </div>
-            <div
-              className="col-sm-2"
-              style={{
-                paddingRight: '0px',
-                display: 'block',
-                textAlign: 'right',
-              }}
-            >
-              <button
-                className={page > 0 ? 'backnext' : 'disable'}
-                onClick={page > 0 ? previousPage : disable}
-                disabled={page > 0 ? false : true}
-              >
-                <NavigateBeforeIcon />
-              </button>
-              <button
-                className={page < subPerPage.length - 1 ? 'backnext' : 'disable'}
-                onClick={page < subPerPage.length - 1 ? nextPage : disable}
-                disabled={page < subPerPage.length - 1 ? false : true}
-              >
-                <NavigateNextIcon />
-              </button>
-            </div>
-          </div>
-          {subPerPage.map((value, index) => (
-            <div className="col-sm-3" key={index} style={{ marginBottom: '20px' }}>
-              <div id="tailieu" className="card">
-                <div className="row">
-                  <div className="col-sm-5" id="playSub">
-                    <button style={{ backgroundImage: `url(${value.image})` }} className="playSub">
-                      <PlayCircleIcon />
-                    </button>
-                  </div>
-                  <div className="col-sm-7" id="contentSub">
-                    <h6>{value.name}</h6>
-                    <p>{value.des}</p>
-                    <p style={{ color: '#CC5C00', marginBottom: '0px' }}>{value.code}</p>
-                    <p style={{ marginBottom: '0px', marginTop: '0px' }}>Giảng viên: {value.teacher}</p>
-                  </div>
+
+        <div className="course__grid">
+          {subPerPage.map((o, i) => {
+            return (
+              <Link to="/course-list" className="course__grid-item" key={i}>
+                <div className="course__grid-item-img">
+                  <img src={o.image} alt="" className="course__grid-img" />
+                  <Play className="course__grid-icon" />
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{ marginTop: '40px' }}>
-        <div className="row" style={{ paddingLeft: '0px', paddingRight: '0px' }}>
-          <div className="col-sm-3">
-            <div className="card" id="cardCover">
-              <h6 style={{ margin: '20px' }}>
-                <b>Thống kê truy cập</b>
-              </h6>
-              <div className="card" id="cardInside">
-                <div className="row">
-                  <div className="col-sm-8">
-                    <p>Đang truy cập:</p>
-                    <p>Lượt truy cập hôm nay:</p>
-                    <p>Lượt truy cập tuần này:</p>
-                    <p>Lượt truy cập tháng này:</p>
-                    <p>Tổng lượt truy cập:</p>
-                  </div>
-                  <div className="col-sm-4">
-                    <p style={{ color: '#CC5C00' }}>
-                      <b>31</b>
-                    </p>
-                    <p style={{ color: '#CC5C00' }}>
-                      <b>97</b>
-                    </p>
-                    <p style={{ color: '#CC5C00' }}>
-                      <b>1,298</b>
-                    </p>
-                    <p style={{ color: '#CC5C00' }}>
-                      <b>31</b>
-                    </p>
-                    <p style={{ color: '#CC5C00' }}>
-                      <b>31</b>
-                    </p>
-                  </div>
+                <div className="course__grid-content">
+                  <div className="sub-header2">{o.name}</div>
+                  <p className="sub-title">{o.des}</p>
+                  <span>{o.nameId}</span>
+                  <p className="teacher">Giảng viên: {o.teacher}</p>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-sm-9">
-            <div
-              className="row"
-              style={{
-                paddingRight: '0px',
-                color: '#CC5C00',
-                paddingLeft: '0px',
-              }}
-            >
-              <div className="col-sm-10" style={{ paddingLeft: '0px', marginBottom: '10px' }}>
-                <p>
-                  <b>Tệp tải lên gần đây</b>
-                </p>
-              </div>
-              <div
-                className="col-sm-2"
-                style={{
-                  paddingRight: '0px',
-                  display: 'block',
-                  textAlign: 'right',
-                }}
-              >
-                <button
-                  className={file > 0 ? 'backnext' : 'disable'}
-                  onClick={file > 0 ? previousFile : disable}
-                  disabled={file > 0 ? false : true}
-                >
-                  <NavigateBeforeIcon />
-                </button>
-                <button
-                  className={file < filePerPage.length - 1 ? 'backnext' : 'disable'}
-                  onClick={file < filePerPage.length - 1 ? nextFile : disable}
-                  disabled={file < filePerPage.length - 1 ? false : true}
-                >
-                  <NavigateNextIcon />
-                </button>
-              </div>
-            </div>
-            <div className="row" style={{ paddingLeft: '0px', paddingRight: '0px' }}>
-              {filePerPage.map((value, index) => (
-                <div className="col-sm-4" key={index} style={{ marginBottom: '20px' }}>
-                  <div id="tailieu" className="card">
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+      <div className="line_3">
+        <section className="file">
+          <div className="row">
+            <div className="col-sm-3">
+              <section className="statistic">
+                <div className="statistic__wrap">
+                  <div className="sub-header2">Thống kê truy cập</div>
+                  <div className="statistic-content">
                     <div className="row">
-                      <div className="col-sm-5" id="imgFile">
-                        <img height={'40%'} src={value.image} alt={value.name} />
+                      <div className="col-sm-8 pd-40">
+                        <p className='content'>Đang truy cập:</p>
+                        <p className='content'>Lượt truy cập hôm nay:</p>
+                        <p className='content'>Lượt truy cập tuần này:</p>
+                        <p className='content'>Lượt truy cập tháng này:</p>
+                        <p className='content'>Tổng lượt truy cập:</p>
                       </div>
-                      <div className="col-sm-7" id="contentSub">
-                        <h6>{value.name}</h6>
-                        <p style={{ color: '#373839', fontSize: '14px' }}>{value.datetime}</p>
-                        <p style={{ marginBottom: '0px', color: '#CC5C00' }}>{value.subject}</p>
-                        <p
-                          style={{
-                            marginTop: '0px',
-                            marginBottom: '0px',
-                          }}
-                        >
-                          Giảng viên: {value.teacher}
-                        </p>
+                      <div className="col-sm-4">
+                        <p className='menu'>31</p>
+                        <p className='menu'>97</p>
+                        <p className='menu'>1298</p>
+                        <p className='menu'>31</p>
+                        <p className='menu'>31</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
+              </section>
             </div>
-            <p
-              style={{
-                fontStyle: 'italic',
-                color: 'gray',
-                fontSize: '16px',
-                marginLeft: '12px',
-              }}
-            >
-              Hiện thị 10 tệp tài liệu đã xem gần đây nhất
-            </p>
+            <div className="col-sm-9">
+              <div className="row">
+                <div className="sub-header2">Tệp tin tải lên gần đây</div>
+                <div className="arrow">
+                  <button
+                    className={file > 0 ? 'backnext' : 'disable'}
+                    onClick={file > 0 ? previousFile : disable}
+                    disabled={file > 0 ? false : true}
+                  >
+                    <Arrow className="arrow-icon" />
+                  </button>
+                  <button
+                    className={file < filePerPage.length - 1 ? 'backnext' : 'disable'}
+                    onClick={file < filePerPage.length - 1 ? nextFile : disable}
+                    disabled={file < filePerPage.length - 1 ? false : true}
+                  >
+                    <ArrowRight className="arrow-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="file__grid">
+                {filePerPage.map((o, i) => {
+                  return (
+                    <div className="file__grid-item" key={i}>
+                      <div className="file__grid-item-img">
+                        <img src={o.image} alt="" className="file__grid-img" />
+                      </div>
+                      <div className="file__grid-content">
+                        <div className="sub-header2">{o.name}</div>
+                        <p className="sub-title">{o.datetime}</p>
+                        <span>{o.subject}</span>
+                        <p className="teacher">Giảng viên: {o.teacher}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className='status'>Hiển thị 10 tệp tài liệu đã xem gần đây nhất</p>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };

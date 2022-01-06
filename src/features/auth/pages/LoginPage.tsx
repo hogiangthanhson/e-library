@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import bg from 'assets/images/bg_login.png';
 import './login.scss';
 import { ReactComponent as Logo } from 'assets/images/logo.svg';
@@ -29,7 +29,7 @@ export default function LoginPage() {
           })
         );
         localStorage.setItem('token', user.refreshToken);
-        navigate('/');
+        navigate('/home');
       })
       .catch(() => alert('invalid user!'));
   };
