@@ -1,0 +1,17 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 52px;
+  background: var(--blue-orange-4);
+  border-radius: 8px;
+  border: none;
+  &-text {
+    font-family: Mulish;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.015em;
+    color: #ffffff;
+  }
+}

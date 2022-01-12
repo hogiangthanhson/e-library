@@ -144,7 +144,7 @@ export default function SubjectToolbar({ filterName, onFilterName }: any) {
       }}
     >
       <Grid container>
-        {/* <Grid item xs={2}>
+        <Grid item xs={2}>
           <div
             style={{
               paddingLeft: '0px',
@@ -156,7 +156,9 @@ export default function SubjectToolbar({ filterName, onFilterName }: any) {
             <React.Fragment>
               <label style={{ fontSize: '16px', marginRight: '20px', color: '#373839' }}>Môn học</label>
               <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-                <Button className="year">{options[selectedIndex]}</Button>
+                <Button style={{ background: '#fff', color: '#373839' }} className="year">
+                  {options[selectedIndex]}
+                </Button>
                 <Button
                   className="down"
                   size="small"
@@ -164,6 +166,10 @@ export default function SubjectToolbar({ filterName, onFilterName }: any) {
                   aria-expanded={open ? 'true' : undefined}
                   aria-label="select merge strategy"
                   aria-haspopup="menu"
+                  style={{
+                    background: '#fff',
+                    color: '#373839',
+                  }}
                   onClick={handleToggle}
                 >
                   <ArrowDropDownIcon />
@@ -217,8 +223,11 @@ export default function SubjectToolbar({ filterName, onFilterName }: any) {
             <React.Fragment>
               <label style={{ fontSize: '16px', marginRight: '20px', color: '#373839' }}>Giảng viên</label>
               <ButtonGroup variant="contained" ref={anchorRefTeacher} aria-label="split button">
-                <Button className="year">{teacher[selectedIndex]}</Button>
+                <Button style={{ background: '#fff', color: '#373839' }} className="year">
+                  {teacher[selectedIndex]}
+                </Button>
                 <Button
+                  style={{ background: '#fff', color: '#373839' }}
                   className="down"
                   size="small"
                   aria-controls={openTeacher ? 'split-button-menu' : undefined}
@@ -278,8 +287,11 @@ export default function SubjectToolbar({ filterName, onFilterName }: any) {
             <React.Fragment>
               <label style={{ fontSize: '16px', marginRight: '20px', color: '#373839' }}>Tình trạng tài liệu</label>
               <ButtonGroup variant="contained" ref={anchorRefStatus} aria-label="split button">
-                <Button className="year">{status[selectedIndex]}</Button>
+                <Button style={{ background: '#fff', color: '#373839' }} className="year">
+                  {status[selectedIndex]}
+                </Button>
                 <Button
+                  style={{ background: '#fff', color: '#373839' }}
                   className="down"
                   size="small"
                   aria-controls={openStatus ? 'split-button-menu' : undefined}
@@ -326,7 +338,7 @@ export default function SubjectToolbar({ filterName, onFilterName }: any) {
               </Popper>
             </React.Fragment>
           </div>
-        </Grid> */}
+        </Grid>
         <Grid item xs={6} sx={{ display: 'flex' }}>
           <SearchStyle
             value={filterName}

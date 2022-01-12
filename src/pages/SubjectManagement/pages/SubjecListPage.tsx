@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import {filter} from 'lodash';
+import { filter } from 'lodash';
 // material
 import {
   Link,
@@ -245,7 +245,6 @@ export const SubjectListPage = () => {
                         </Typography>
                       </Stack>
                     </StyledTableCell>
-
                     <StyledTableCell align="left">{teacher}</StyledTableCell>
                     <StyledTableCell align="left">{fileNum}</StyledTableCell>
                     <StyledTableCell align="left">{isVerified}</StyledTableCell>
@@ -266,7 +265,7 @@ export const SubjectListPage = () => {
         </TableContainer>
 
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[1, 5, 10]}
           component="div"
           count={USERLIST.length}
           rowsPerPage={rowsPerPage}

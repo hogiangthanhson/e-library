@@ -21,7 +21,7 @@ export function Navigation(props: LeaderProps) {
 
   const listIcon = [
     {
-      to: '/home',
+      to: 'home',
       src: <Home />,
     },
     {
@@ -29,7 +29,7 @@ export function Navigation(props: LeaderProps) {
       src: <Book />,
     },
     {
-      to: 'privatefile',
+      to: 'privatefile/all-private-file',
       src: <File />,
     },
     {
@@ -81,7 +81,7 @@ export function Navigation(props: LeaderProps) {
                 </NavLink>
               </section>
             </li>
-            <NavLink className="menu__item" to="privatefile">
+            <NavLink className="menu__item" to="privatefile/all-private-file">
               <File className="menu__item-icon" />
               <span>Tệp riêng tư</span>
             </NavLink>

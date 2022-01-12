@@ -30,7 +30,7 @@ function App() {
         <Route path="home" element={<HomePage />} />
         <Route path="profile" element={<Profile />} />
         <Route path="subjectmanagement/subject-list" element={<SubjectListPage />} />
-        <Route path="privatefile" element={<PrivateFilePage />} />
+        <Route path="privatefile/all-private-file" element={<PrivateFilePage />} />
         <Route path="exambank" element={<ExamBankPage />} />
         <Route path="notify" element={<NotificationPage />} />
         <Route path="system" element={<SystemPage />} />

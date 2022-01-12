@@ -10,11 +10,11 @@ export function TopBar() {
   return (
     <div className="container">
       <div className="topbar">
-        <Link to='profile' className="account">
-          <div className="left">
+        <div className="account">
+          <Link to='profile' className="left">
             <User />
             <div className="account-name menu">Admin</div>
-          </div>
+          </Link>
           <div className="right">
             <Link
               to="/login"
@@ -27,7 +27,7 @@ export function TopBar() {
               Đăng xuất
             </Link>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

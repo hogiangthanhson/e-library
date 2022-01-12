@@ -134,7 +134,7 @@ const listFile = [
     datetime: '12:01 12/12/2020',
     subject: 'Toán đại số',
     teacher: 'ABC',
-    image: require('../../../assets/images/MP3.png'),
+    image: require('../../../assets/images/mp3.png'),
   },
   {
     name: 'Lorem ipsum.mp4',

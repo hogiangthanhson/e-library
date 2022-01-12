@@ -9,9 +9,10 @@ interface LinkRouterProps extends LinkProps {
 
 const breadcrumbNameMap: { [key: string]: string } = {
   'home': 'Trang chủ',
+  'privatefile': 'Tệp riêng tư',
+  'privatefile/all-private-file' : 'Tất cả các tệp',
   'subjectmanagement' : 'Quản lý môn học', 
   'subjectmanagement/subject-list': 'Danh sách môn học',
-  'privatefile': 'Tệp riêng tư',
   'exambank': 'Ngân hàng đề thi',
   'notify': 'Thông báo',
   'system': 'Cài đặt hệ thống',
