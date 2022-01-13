@@ -1,279 +1,274 @@
-import React, { useState } from 'react';
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { filter } from 'lodash';
-// material
-import {
-  Link,
-  ButtonGroup,
-  ClickAwayListener,
-  Grow,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popper,
-  Card,
-  Table,
-  Stack,
-  Button,
-  TableRow,
-  TableBody,
-  TableCell,
-  Typography,
-  TableContainer,
-  TablePagination,
-  styled,
-  tableCellClasses,
-  Pagination,
-} from '@mui/material';
-// components
-import SubjectHead from '../components/HeaderSubject';
-import SubjectToolbar from '../components/ToolbarSubject';
-import SubjectMoreMenu from '../components/MenuSubject';
-import { NienKhoa } from 'components/Common';
+import { ButtonNoIcon, Loading, NienKhoa, SearchBar } from 'components/Common';
+import { ReactComponent as Download } from 'assets/images/fi_download.svg';
+import './SubjectListPage.scss';
+import { ReactComponent as Arrow } from 'assets/images/arrow_down.svg';
+import { ReactComponent as ArrowUD } from 'assets/images/arrow_updown.svg';
+import { ReactComponent as ArrowPage } from 'assets/images/arrow.svg';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import SubjectItem from '../components/SubjectItem';
+import { addDoc, collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { db } from 'firebase-config';
 
-// ----------------------------------------------------------------------
-
-const TABLE_HEAD = [
-  { id: 'subCode', label: 'Mã môn học', alignRight: false },
-  { id: 'subName', label: 'Tên môn học', alignRight: false },
-  { id: 'teacher', label: 'Giảng viên', alignRight: false },
-  { id: 'fileNum', label: 'Số tài liệu chờ duyệt', alignRight: false },
-  { id: 'isVerifed', label: 'Tình trạng tài liệu môn học', alignRight: false },
-  { id: 'date', label: 'Ngày gửi phê duyệt', alignRight: false },
-  { id: '' },
-];
-
-const USERLIST = [
-  {
-    subCode: '2020-6A',
-    subName: 'Thương mại điện tử',
-    teacher: 'Nguyễn Văn A',
-    fileNum: '15/20',
-    isVerified: 'Chờ phê duyệt',
-    date: '12/02/2021',
-  },
-  {
-    subCode: '2020-6B',
-    subName: 'Nguyên lý kế toán',
-    teacher: 'Phạm Thị C',
-    fileNum: '07/10',
-    isVerified: 'Chờ phê duyệt',
-    date: '12/02/2021',
-  },
-  {
-    subCode: '2020-6C',
-    subName: 'Hệ thống thông tin',
-    teacher: 'Trần Hoàng A',
-    fileNum: '10/20',
-    isVerified: 'Đã phê duyệt',
-    date: '15/09/2020',
-  },
-  {
-    subCode: '2020-7A',
-    subName: 'Luật thương mại',
-    teacher: 'Charlie',
-    fileNum: '09/20',
-    isVerified: 'Đã phê duyệt',
-    date: '30/07/2020',
-  },
-  {
-    subCode: '2020-7C',
-    subName: 'Ngân hàng',
-    teacher: 'Trần Hoàng A',
-    fileNum: '15/20',
-    isVerified: 'Đã phê duyệt',
-    date: '12/03/2020',
-  },
-];
-
-// ----------------------------------------------------------------------
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(even)': {
-    backgroundColor: '#F0F3F6',
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-function descendingComparator(a: any, b: any, orderBy: any) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order: any, orderBy: any) {
-  return order === 'desc'
-    ? (a: any, b: any) => descendingComparator(a, b, orderBy)
-    : (a: any, b: any) => -descendingComparator(a, b, orderBy);
-}
-
-function applySortFilter(array: any, comparator: any, query: any) {
-  const stabilizedThis = array.map((el: any, index: any) => [el, index]);
-  stabilizedThis.sort((a: any, b: any) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
-    return a[1] - b[1];
-  });
-  if (query) {
-    return filter(array, (_subject) => _subject.subName.toLowerCase().indexOf(query.toLowerCase()) !== -1);
-  }
-  return stabilizedThis.map((el: any) => el[0]);
-}
-
-const options = ['2020-2021', '2019-2020', '2018-2019'];
-
-export const SubjectListPage = () => {
-  const [page, setPage] = useState(0);
-  const [order, setOrder] = useState('asc');
-
-  const [orderBy, setOrderBy] = useState('subName');
-  const [filterName, setFilterName] = useState('');
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [open, setOpen] = useState(false);
-  const anchorRef = React.useRef<HTMLDivElement>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-
-  const breadcrumbs = [
-    <Link underline="hover" key="1" color="#C9C4C0" href="/">
-      Quản lý học viên
-    </Link>,
-
-    <Typography key="2" color="text.primary">
-      <h1>
-        <b>Danh sách môn học</b>
-      </h1>
-    </Typography>,
+export function SubjectListPage() {
+  let listCourse = [
+    {
+      courseId: '2020-6A',
+      courseName: 'Thương mại điện tử',
+      date: '12/02/2020',
+      docPending: '15/20',
+      slug: 'ecommerce',
+      status: false,
+      teacher: 'Nguyễn Văn A',
+    },
+    {
+      courseId: '2020-6B',
+      courseName: 'Nguyên lý kế toán',
+      date: '12/02/2020',
+      docPending: '07/10',
+      slug: 'accounting-principles',
+      status: false,
+      teacher: 'Phạm Thị C',
+    },
+    {
+      courseId: '2020-6C',
+      courseName: 'Hệ thống thông tin',
+      date: '15/09/2020',
+      docPending: '10/20',
+      slug: 'information-system',
+      status: true,
+      teacher: 'Trần Hoàng A',
+    },
+    {
+      courseId: '2020-7A',
+      courseName: 'Luật thương mại',
+      date: '30/07/2020',
+      docPending: '09/20',
+      slug: 'commercial-law',
+      status: true,
+      teacher: 'Charlie',
+    },
+    {
+      courseId: '2020-7C',
+      courseName: 'Ngân hàng',
+      date: '12/03/2020',
+      docPending: '15/20',
+      slug: 'bank',
+      status: true,
+      teacher: 'Trần Hoàng A',
+    },
+  ];
+  let listHeader = [
+    {
+      key: 'courseID',
+      value: 'Mã môn học',
+    },
+    {
+      key: 'courseName',
+      value: 'Tên môn học',
+    },
+    {
+      key: 'teacher',
+      value: 'Giảng viên',
+    },
+    {
+      key: 'docPending',
+      value: 'Số tài liệu chờ duyệt',
+    },
+    {
+      key: 'status',
+      value: 'Tình trạng tài liệu môn học',
+    },
+    {
+      key: 'date',
+      value: 'Ngày gửi phê duyệt',
+    },
   ];
 
-  const handleMenuItemClick = (event: React.MouseEvent<HTMLLIElement, MouseEvent>, index: number) => {
-    setSelectedIndex(index);
-    setOpen(false);
-  };
+  const [filter, setFilter] = useState({
+    title_like: '',
+  });
+  const [order, setOrder] = useState('ASC');
+  const [rowsPerPage, setRowsPerPage] = useState(8);
+  const [category, setCategory] = useState('');
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+  // const addData = async () => {
+  //   await addDoc(collection(db, 'courses'), listHeader);
+  // };
 
-  const handleClose = (event: Event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target as HTMLElement)) {
-      return;
+  let [data, setData] = useState<any>([]);
+  // const dataCollectionRef = collection(db, 'courses');
+  useEffect(() => {
+    // const getData = async () => {
+    //   const querySnapshot = await getDocs(dataCollectionRef);
+    //   let arr: any = [];
+    //   querySnapshot.forEach((doc) => {
+    //     arr.push({ ...doc.data() });
+    //   });
+    //   setData(arr);
+    // };
+    // getData();
+
+    if (category === '') {
+      setData(listCourse);
+    } else {
+      data = listCourse.filter((file: any) => file.courseName === category || file.teacher === category);
+      setData(data);
     }
+  }, [category]);
 
-    setOpen(false);
+  // Filter
+  const handleFilterChange = (newFilter: any) => {
+    setFilter({
+      ...filter,
+      title_like: newFilter.searchTerm,
+    });
   };
 
-  const handleRequestSort = (event: any, property: any) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+  // Sort
+  const handleSort = (col: any) => {
+    if (order === 'ASC') {
+      const sorted = [...data].sort((a, b) => (a.courseId.toLowerCase() > b.courseId.toLowerCase() ? 1 : -1));
+      setData(sorted);
+      setOrder('DSC');
+    } else if (order === 'DSC') {
+      const sorted = [...data].sort((a, b) => (a.courseId.toLowerCase() < b.courseId.toLowerCase() ? 1 : -1));
+      setData(sorted);
+      setOrder('ASC');
+    }
   };
 
-  const handleChangePage = ({ event, newPage }: any) => {
-    setPage(newPage);
+  //
+  const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value));
   };
 
-  const handleChangeRowsPerPage = (event: any) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  // Filter Select Options
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(event.target.value);
   };
-
-  const handleFilterByName = (event: any) => {
-    setFilterName(event.target.value);
-  };
-
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
-
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName);
 
   return (
-    <div>
+    <div className="container">
       <div className="row">
-        <div id="nienkhoa" className="col-sm-3" style={{ paddingLeft: '0px', height: '90px' }}>
-          <NienKhoa />
+        <NienKhoa />
+      </div>
+      <div className="board_body">
+        <div className="top">
+          <div className="col-4" style={{ display: 'flex' }}>
+            <div id="course" style={{ marginRight: '32px' }}>
+              <span>Môn học</span>
+              <div className="dropdown-select">
+                <select id="form-control" onChange={handleSelectChange}>
+                  <option defaultValue="Tất cả môn học" value="">
+                    Tất cả môn học
+                  </option>
+                  <option value="Thương mại điện tử">Thương mại điện tử</option>
+                  <option value="Nguyên lý kế toán">Nguyên lý kế toán</option>
+                  <option value="Hệ thống thông tin">Hệ thống thông tin</option>
+                  <option value="Luật thương mại">Luật thương mại</option>
+                  <option value="Ngân hàng">Ngân hàng</option>
+                </select>
+                <div className="arrow">
+                  <Arrow />
+                </div>
+              </div>
+            </div>
+            <div id="teacher" style={{ marginRight: '32px' }}>
+              <span>Giảng viên</span>
+              <div className="dropdown-select">
+                <select id="form-control" onChange={handleSelectChange}>
+                  <option defaultValue="Tất cả giảng viên" value="">
+                    Tất cả giảng viên
+                  </option>
+                  <option value="Nguyễn Văn A">Nguyễn Văn A</option>
+                  <option value="Nguyễn Văn C">Nguyễn Văn C</option>
+                  <option value="Văn Thị B">Văn Thị B</option>
+                </select>
+                <div className="arrow">
+                  <Arrow />
+                </div>
+              </div>
+            </div>
+            <div id="status">
+              <span>Tình trạng tài liệu</span>
+              <div className="dropdown-select">
+                <select id="form-control" onChange={handleSelectChange}>
+                  <option defaultValue="Tất cả tình trạng" value="">
+                    Tất cả tình trạng
+                  </option>
+                  <option value="">Đã phê duyệt</option>
+                  <option value="">Chờ phê duyệt</option>
+                </select>
+                <div className="arrow">
+                  <Arrow />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-4">
+            <SearchBar onSubmit={handleFilterChange} />
+          </div>
+        </div>
+        <div className="mid">
+          <table>
+            <thead className="sub-header2">
+              <tr>
+                {listHeader.map((o, i) => (
+                  <th key={i}>
+                    <span>{o.value}</span>
+                    <ArrowUD className="header-icon" onClick={() => handleSort(o.key)} />
+                  </th>
+                ))}
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {(rowsPerPage > 0 ? data.slice(0, rowsPerPage) : data)
+                .filter((value: any) => {
+                  if (filter.title_like === '') {
+                    return value;
+                  } else if (
+                    value.courseId.toLowerCase().includes(filter.title_like.toLowerCase()) ||
+                    value.courseName.toLowerCase().includes(filter.title_like.toLowerCase()) ||
+                    value.teacher.toLowerCase().includes(filter.title_like.toLowerCase())
+                  ) {
+                    return value;
+                  }
+                })
+                .map((o: any, i: number) => (
+                  <SubjectItem {...o} key={i} />
+                ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="bottom">
+          <div className="left">
+            <span className="status">Hiển thị</span>
+            <input className="bottom-input" type="text" defaultValue={8} onChange={handlePageChange} />
+            <span className="status"> hàng trong mỗi trang</span>
+          </div>
+          <div className="paginate">
+            <ArrowPage className="paginate-icon" />
+            <div className="content">
+              <span>1</span>
+            </div>
+            <div className="content active">
+              <span>2</span>
+            </div>
+            <div className="content">
+              <span>3</span>
+            </div>
+            <div className="content">
+              <span>...</span>
+            </div>
+            <div className="content">
+              <span>100</span>
+            </div>
+            <ArrowPage className="paginate-icon" />
+          </div>
         </div>
       </div>
-      <Card
-        sx={{
-          boxShadow: '4px 4px 25px 4px rgba(154, 202, 245, 0.25)',
-          borderRadius: '16px',
-        }}
-      >
-        <SubjectToolbar filterName={filterName} onFilterName={handleFilterByName} />
-
-        <TableContainer
-          sx={{
-            minWidth: 800,
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '20px',
-            marginBottom: '20px',
-          }}
-        >
-          <Table sx={{ width: '90%', overflow: 'hidden', borderRadius: '8px' }}>
-            <SubjectHead
-              order={order}
-              orderBy={orderBy}
-              headLabel={TABLE_HEAD}
-              rowCount={USERLIST.length}
-              onRequestSort={handleRequestSort}
-            />
-            <TableBody>
-              {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: never) => {
-                const { subCode, subName, teacher, fileNum, isVerified, date } = row;
-
-                return (
-                  <StyledTableRow hover key={subCode}>
-                    <StyledTableCell align="left">{subCode}</StyledTableCell>
-                    <StyledTableCell component="th" scope="row" padding="none">
-                      <Stack direction="row" alignItems="center" spacing={2}>
-                        <Typography variant="subtitle2" noWrap>
-                          {subName}
-                        </Typography>
-                      </Stack>
-                    </StyledTableCell>
-                    <StyledTableCell align="left">{teacher}</StyledTableCell>
-                    <StyledTableCell align="left">{fileNum}</StyledTableCell>
-                    <StyledTableCell align="left">{isVerified}</StyledTableCell>
-                    <StyledTableCell align="left">{date}</StyledTableCell>
-                    <StyledTableCell align="right">
-                      <SubjectMoreMenu />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <TablePagination
-          rowsPerPageOptions={[1, 5, 10]}
-          component="div"
-          count={USERLIST.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Card>
     </div>
   );
-};
+}

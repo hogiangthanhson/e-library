@@ -7,11 +7,12 @@ import { HomePage } from 'pages/Home';
 import { ExamBankPage } from 'pages/ExamBank';
 import { NotificationPage } from 'pages/Notification';
 import { PrivateFilePage } from 'pages/PrivateFile';
-import { SubjectListPage} from 'pages/SubjectManagement';
+import { SubjectListPage } from 'pages/SubjectManagement';
 import { SupportPage } from 'pages/Support';
 import { SystemPage } from 'pages/System';
 import { Route, Routes } from 'react-router-dom';
 import { Profile } from 'pages/Profile';
+import { SubjectDetail } from 'pages/SubjectManagement/pages/SubjectDetail';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="home" element={<HomePage />} />
         <Route path="profile" element={<Profile />} />
         <Route path="subjectmanagement/subject-list" element={<SubjectListPage />} />
+        <Route path="subject-list/:slug" element={<SubjectDetail />} />
         <Route path="privatefile/all-private-file" element={<PrivateFilePage />} />
         <Route path="exambank" element={<ExamBankPage />} />
         <Route path="notify" element={<NotificationPage />} />

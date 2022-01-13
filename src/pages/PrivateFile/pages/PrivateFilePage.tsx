@@ -255,7 +255,7 @@ export function PrivateFilePage() {
                     <td>{o.dateEdit}</td>
                     <td>{o.size}</td>
                     <td className='tab'>
-                      <More className="mid-icon" onClick={(e) => setClicked(!clicked)}/>
+                      <More className="mid-icon"/>
                       <div className='tab-menu'>
                         <ul>
                           <li>

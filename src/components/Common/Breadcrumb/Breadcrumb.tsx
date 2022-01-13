@@ -13,6 +13,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   'privatefile/all-private-file' : 'Tất cả các tệp',
   'subjectmanagement' : 'Quản lý môn học', 
   'subjectmanagement/subject-list': 'Danh sách môn học',
+  'subject-list' : 'Danh sách môn học',
   'exambank': 'Ngân hàng đề thi',
   'notify': 'Thông báo',
   'system': 'Cài đặt hệ thống',
